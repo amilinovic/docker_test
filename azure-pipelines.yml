@@ -1,0 +1,39 @@
+# Docker
+# Build a Docker image
+# https://docs.microsoft.com/azure/devops/pipelines/languages/docker
+
+trigger:
+- main
+
+resources:
+- repo: self
+
+variables:
+  imageName: 'image-$(Build.Repository.Name):$(Build.SourceBranchName)-$(Build.BuildId)'
+
+stages:
+- stage: BuildTST
+  displayName: Build image & Deploy
+  jobs:
+  - job: Build
+    displayName: Build & Deploy
+    pool:
+      vmImage: ubuntu-latest
+    steps:
+    - task: Docker@0
+      displayName: 'Build an image'
+      inputs:
+        containerregistrytype: 'Azure Container Registry'
+        azureSubscription: 'amilinovic_test'
+        azureContainerRegistry: 'crwetsttestplaybook.azurecr.io'
+        action: 'Build an image'
+        dockerFile: 'Dockerfile'
+        imageName: '$(imageName)'
+    - task: Docker@0
+      displayName: 'Push an image'
+      inputs:
+        containerregistrytype: 'Azure Container Registry'
+        azureSubscription: 'amilinovic_test'
+        azureContainerRegistry: 'crwetsttestplaybook.azurecr.io'
+        action: 'Push an image'
+        imageName: '$(imageName)'
