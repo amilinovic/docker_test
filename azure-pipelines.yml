@@ -9,7 +9,7 @@ resources:
 - repo: self
 
 variables:
-  azureContainerRegistry: '{"loginServer":"crwetsttestplaybook.azurecr.io", "id" : "/subscriptions/d35b6a23-881d-4b45-9836-652e55e255cb/resourceGroups/we-tst-test-playbook/providers/Microsoft.ContainerRegistry/registries/crwetsttestplaybook"}'
+  ContainerRegistry: '{"loginServer":"crwetsttestplaybook.azurecr.io", "id" : "/subscriptions/d35b6a23-881d-4b45-9836-652e55e255cb/resourceGroups/we-tst-test-playbook/providers/Microsoft.ContainerRegistry/registries/crwetsttestplaybook"}'
   imageName: 'image-$(Build.Repository.Name):latest'
 
 pool:
@@ -17,7 +17,7 @@ pool:
 
 stages:
 - stage: BuildTST
-  displayName: Build image & Deploy
+  displayName: Build image & Deploy on TST
   jobs:
   - job: Build
     displayName: Build & Deploy
@@ -26,19 +26,19 @@ stages:
       displayName: 'Build an image'
       inputs:
         azureSubscription: 'amilinovic_test (d35b6a23-881d-4b45-9836-652e55e255cb)'
-        azureContainerRegistry: '${azureContainerRegistry}'
+        azureContainerRegistry: '${ContainerRegistry}'
         dockerFile: Dockerfile
         imageName: 'TST-$(Build.Repository.Name):latest'
     - task: Docker@0
       displayName: 'Push an image'
       inputs:
         azureSubscription: 'amilinovic_test (d35b6a23-881d-4b45-9836-652e55e255cb)'
-        azureContainerRegistry: '${azureContainerRegistry}'
+        azureContainerRegistry: '${ContainerRegistry}'
         action: 'Push an image'
         imageName: 'TST-$(Build.Repository.Name):latest'
 
 - stage: BuildACC
-  displayName: Build image & Deploy
+  displayName: Build image & Deploy on ACC
   jobs:
   - job: Build
     displayName: Build & Deploy
@@ -47,19 +47,19 @@ stages:
       displayName: 'Build an image'
       inputs:
         azureSubscription: 'amilinovic_test (d35b6a23-881d-4b45-9836-652e55e255cb)'
-        azureContainerRegistry: '${azureContainerRegistry}'
+        azureContainerRegistry: '${ContainerRegistry}'
         dockerFile: Dockerfile
         imageName: 'ACC-$(Build.Repository.Name):latest'
     - task: Docker@0
       displayName: 'Push an image'
       inputs:
         azureSubscription: 'amilinovic_test (d35b6a23-881d-4b45-9836-652e55e255cb)'
-        azureContainerRegistry: '${azureContainerRegistry}'
+        azureContainerRegistry: '${ContainerRegistry}'
         action: 'Push an image'
         imageName: 'ACC-$(Build.Repository.Name):latest'
 
 - stage: BuildPRD
-  displayName: Build image & Deploy
+  displayName: Build image & Deploy on PRD
   jobs:
   - job: Build
     displayName: Build & Deploy
@@ -68,14 +68,14 @@ stages:
       displayName: 'Build an image'
       inputs:
         azureSubscription: 'amilinovic_test (d35b6a23-881d-4b45-9836-652e55e255cb)'
-        azureContainerRegistry: '${azureContainerRegistry}'
+        azureContainerRegistry: '${ContainerRegistry}'
         dockerFile: Dockerfile
         imageName: 'PRD-$(Build.Repository.Name):latest'
     - task: Docker@0
       displayName: 'Push an image'
       inputs:
         azureSubscription: 'amilinovic_test (d35b6a23-881d-4b45-9836-652e55e255cb)'
-        azureContainerRegistry: '${azureContainerRegistry}'
+        azureContainerRegistry: '${ContainerRegistry}'
         action: 'Push an image'
         imageName: 'PRD-$(Build.Repository.Name):latest'
     # - task: Docker@0
