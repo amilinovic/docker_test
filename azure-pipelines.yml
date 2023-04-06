@@ -19,8 +19,8 @@ stages:
 - stage: BuildTST
   displayName: Build image & Deploy
   jobs:
-  # - job: Build
-  #   displayName: Build & Deploy
+  - job: Build
+    displayName: Build & Deploy
     steps:
     - task: Docker@0
       displayName: 'Build an image'
@@ -40,8 +40,8 @@ stages:
 - stage: BuildACC
   displayName: Build image & Deploy
   jobs:
-  # - job: Build
-  #   displayName: Build & Deploy
+  - job: Build
+    displayName: Build & Deploy
     steps:
     - task: Docker@0
       displayName: 'Build an image'
@@ -61,8 +61,8 @@ stages:
 - stage: BuildPRD
   displayName: Build image & Deploy
   jobs:
-  # - job: Build
-  #   displayName: Build & Deploy
+  - job: Build
+    displayName: Build & Deploy
     steps:
     - task: Docker@0
       displayName: 'Build an image'
