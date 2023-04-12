@@ -9,7 +9,7 @@ resources:
 - repo: self
 
 variables:
-  ContainerRegistry: '{"loginServer":"crwetsttestplaybook.azurecr.io", "id" : "/subscriptions/d35b6a23-881d-4b45-9836-652e55e255cb/resourceGroups/we-tst-test-playbook/providers/Microsoft.ContainerRegistry/registries/crwetsttestplaybook"}'
+  ContainerRegistry: '{"loginServer":"crtstcontainerregistry.azurecr.io", "id" : "/subscriptions/d35b6a23-881d-4b45-9836-652e55e255cb/resourceGroups/we-tst-container-registry/providers/Microsoft.ContainerRegistry/registries/crtstcontainerregistry"}'
   imageName: 'image-$(Build.Repository.Name):latest'
 
 pool:
@@ -28,14 +28,14 @@ stages:
         azureSubscription: 'amilinovic_test (d35b6a23-881d-4b45-9836-652e55e255cb)'
         azureContainerRegistry: '$(ContainerRegistry)'
         dockerFile: Dockerfile
-        imageName: 'TST-$(Build.Repository.Name):latest'
+        imageName: 'image-$(Build.Repository.Name):tst'
     - task: Docker@0
       displayName: 'Push an image'
       inputs:
         azureSubscription: 'amilinovic_test (d35b6a23-881d-4b45-9836-652e55e255cb)'
         azureContainerRegistry: '$(ContainerRegistry)'
         action: 'Push an image'
-        imageName: 'TST-$(Build.Repository.Name):latest'
+        imageName: 'image-$(Build.Repository.Name):tst'
 
 - stage: BuildACC
   displayName: Build image & Deploy on ACC
@@ -49,14 +49,14 @@ stages:
         azureSubscription: 'amilinovic_test (d35b6a23-881d-4b45-9836-652e55e255cb)'
         azureContainerRegistry: '$(ContainerRegistry)'
         dockerFile: Dockerfile
-        imageName: 'ACC-$(Build.Repository.Name):latest'
+        imageName: 'image-$(Build.Repository.Name):acc'
     - task: Docker@0
       displayName: 'Push an image'
       inputs:
         azureSubscription: 'amilinovic_test (d35b6a23-881d-4b45-9836-652e55e255cb)'
         azureContainerRegistry: '$(ContainerRegistry)'
         action: 'Push an image'
-        imageName: 'ACC-$(Build.Repository.Name):latest'
+        imageName: 'image-$(Build.Repository.Name):acc'
 
 - stage: BuildPRD
   displayName: Build image & Deploy on PRD
@@ -70,14 +70,14 @@ stages:
         azureSubscription: 'amilinovic_test (d35b6a23-881d-4b45-9836-652e55e255cb)'
         azureContainerRegistry: '$(ContainerRegistry)'
         dockerFile: Dockerfile
-        imageName: 'PRD-$(Build.Repository.Name):latest'
+        imageName: 'image-$(Build.Repository.Name):prd'
     - task: Docker@0
       displayName: 'Push an image'
       inputs:
         azureSubscription: 'amilinovic_test (d35b6a23-881d-4b45-9836-652e55e255cb)'
         azureContainerRegistry: '$(ContainerRegistry)'
         action: 'Push an image'
-        imageName: 'PRD-$(Build.Repository.Name):latest'
+        imageName: 'image-$(Build.Repository.Name):prd'
     # - task: Docker@0
     #   displayName: 'Build an image'
     #   inputs:
