@@ -9,7 +9,7 @@ resources:
 - repo: self
 
 variables:
-  ContainerRegistry: '{"loginServer":"crwetsttestplaybook.azurecr.io", "id" : "/subscriptions/d35b6a23-881d-4b45-9836-652e55e255cb/resourceGroups/we-tst-test-playbook/providers/Microsoft.ContainerRegistry/registries/crwetsttestplaybook"}'
+  ContainerRegistry: '{"loginServer":"containertestimages.azurecr.io", "id" : "/subscriptions/d35b6a23-881d-4b45-9836-652e55e255cb/resourceGroups/we-tst-test-playbook1/providers/Microsoft.ContainerRegistry/registries/containertestimages"}'
   imageName: 'image-$(Build.Repository.Name):latest'
 
 pool:
